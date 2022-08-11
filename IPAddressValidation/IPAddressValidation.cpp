@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include <stdlib.h>
 
-bool check_format(std::string ip);
-std::string get_address_part(std::string ip, int oktetNumber);
-bool check_part(std::string part);
+bool check_format(const std::string&);
+std::string get_address_part(const std::string&, int oktetNumber);
+bool check_part(const std::string&);
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
     std::cout << (valid ? "Valid\n": "Invalid\n");
 }
 
-bool check_format(std::string ip)
+bool check_format(const std::string &ip)
 {
     if (ip.find("..") == -1)
     {
@@ -51,7 +51,7 @@ bool check_format(std::string ip)
     return true;
 }
 
-std::string get_address_part(std::string ip, int oktetNumber)
+std::string get_address_part(const std::string &ip, int oktetNumber)
 {
     
     std::string part1, part2, part3, part4, temp;
@@ -106,7 +106,7 @@ std::string get_address_part(std::string ip, int oktetNumber)
     return std::string(result);
 }
 
-bool check_part(std::string part)
+bool check_part(const std::string &part)
 {
     
     if (part.length() > 2)
