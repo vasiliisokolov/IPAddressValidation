@@ -7,6 +7,7 @@ bool check_part(const std::string&);
 
 int main()
 {
+    loop:
     std::string ip;
     int oktetNumber;
     bool valid = true;
@@ -34,19 +35,24 @@ int main()
 
 bool check_format(const std::string &ip)
 {
-    if (ip.find("..") == -1)
+    if (ip.find("..") != -1)
     {
-        for (int i = 0; i < ip.length(); i++)
-        {
-            if (ip[i] != '.' || ip[i] > '0' && ip[i] > '9')
-            {
-                return false;
-            }
-        }
+        return false;
+    }
+    else if (ip[0] == '.' || ip[ip.length() - 1] == '.')
+    {
+        return false;
     }
     else
     {
-        return false;
+        for (int i = 0; i < ip.length(); i++)
+        {
+            if (ip[i] < '.' || ip[i] > '9')
+            {
+                return false;
+            }
+            
+        }
     }
     return true;
 }
@@ -109,7 +115,7 @@ std::string get_address_part(const std::string &ip, int oktetNumber)
 bool check_part(const std::string &part)
 {
     
-    if (part.length() > 2)
+    if (part.length() > 3)
     {
         return false;
     }
