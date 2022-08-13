@@ -31,6 +31,7 @@ int main()
         valid = false;
     }
     std::cout << (valid ? "Valid\n": "Invalid\n");
+    goto loop;
 }
 
 bool check_format(const std::string &ip)
@@ -121,15 +122,27 @@ bool check_part(const std::string &part)
     }
     else
     {
-        int number = atoi(part.c_str());
-        if (number >= 0 && number <= 225)
+        bool foundNul = false;
+        for (int i = 0; i < part.length(); i++)
         {
-            return true;
+
+            if (part[i] == '0' && foundNul)
+            {
+                return false;
+            }
+            if (part[i] == '0' && !foundNul)
+            {
+                foundNul = true;
+            }
+
         }
-        else
-        { 
+        int number = atoi(part.c_str());
+        
+        if (number < 0 || number > 225)
+        {
             return false;
         }
     }
+    return true;
 
 }
